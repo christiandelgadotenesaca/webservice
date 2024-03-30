@@ -3,9 +3,12 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from sklearn.preprocessing import MultiLabelBinarizer
-from appMultilabel.logic import prediccionModelo
 
-class prediccionModelo():
+class PrediccionModelo():
+
+    def __init__(self):
+        pass
+
     #Funcion para cargar red neuronal
     def cargarModelo(self,nombreArchivo):
         # Cargar el modelo previamente guardado
@@ -34,14 +37,14 @@ class prediccionModelo():
         return labels
 
 
-    def predecirImagen(self):
+    def predecirImagen(self, nueva_imagen_path):
+        print('Entro a predecirImagen')
         labels = self.cargarLabels()
         # Codificación de etiquetas usando MultiLabelBinarizer
         mlb = MultiLabelBinarizer()
         mlb.fit_transform(labels)
 
         # Cargar la nueva imagen
-        nueva_imagen_path = "imagenesMultilabel/imagenes_Nuevas/test001.jpg"  # Reemplaza con la ruta de tu imagen
         nueva_imagen = Image.open(nueva_imagen_path)
 
         # Ajustar el tamaño de la imagen según el tamaño que utilizaste durante el entrenamiento
@@ -66,4 +69,3 @@ class prediccionModelo():
         print("Categorias predichas:", prediccion_nueva_imagen.round())
         print("Etiquetas predichas:", etiquetas_predichas)
         return etiquetas_predichas
-

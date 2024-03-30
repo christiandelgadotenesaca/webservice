@@ -41,5 +41,6 @@ urlpatterns = [
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
+    re_path(r'^test/',views.Clasificacion.test,name='test_get'),
     re_path(r'^predecir/',views.Clasificacion.predecir,name='prueba_get'),
 ]

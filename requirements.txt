@@ -1,0 +1,8 @@
+django
+djangorestframework
+Pillow
+numpy
+scikit-learn
+tensorflow
+djangorestframework
+drf-yasg

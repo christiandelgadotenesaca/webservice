@@ -1,0 +1,11 @@
+#Instalar varios modulos
+pip install -r requirements.txt
+
+#Creacion de nuevo proyecto
+django-admin startproject “nombre_proyecto”
+
+#Correr server
+python manage.py runserver
+
+#Migracion para las apps
+python manage.py migrate

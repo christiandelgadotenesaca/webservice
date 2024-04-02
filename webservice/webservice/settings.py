@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'appMultilabel.apps.appMultilabelConfig' #Se incluye la app
-
+    'appMultilabel.apps.appMultilabelConfig', #Se incluye la app
+    'rest_framework',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
@@ -88,7 +89,7 @@ ROOT_URLCONF = 'webservice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['appMultilabel/template'], #Se indica el directorio de Templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

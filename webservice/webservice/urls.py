@@ -45,4 +45,5 @@ urlpatterns = [
     re_path(r'^predecirIOJson/', views.Clasificacion.predecirIOJson),
     re_path(r'^solitud/$', views.Clasificacion.solicitud),
     re_path(r'^predecir/$', views.Clasificacion.predecir),
+    re_path(r'^predecirConImagen/', views.Clasificacion.predecirConImagen),
 ]

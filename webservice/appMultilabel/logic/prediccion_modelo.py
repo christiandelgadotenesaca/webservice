@@ -69,3 +69,33 @@ class PrediccionModelo():
         print("Categorias predichas:", prediccion_nueva_imagen.round())
         print("Etiquetas predichas:", etiquetas_predichas)
         return etiquetas_predichas
+
+    def predecirConImagen(self, nueva_imagen):
+        print('Entro a predecirImagen')
+        labels = self.cargarLabels()
+        # Codificación de etiquetas usando MultiLabelBinarizer
+        mlb = MultiLabelBinarizer()
+        mlb.fit_transform(labels)
+
+        # Ajustar el tamaño de la imagen según el tamaño que utilizaste durante el entrenamiento
+        imagen_width, imagen_height = 128, 128
+        nueva_imagen = nueva_imagen.resize((imagen_width, imagen_height))
+
+        # Convertir la imagen a un array de NumPy y normalizar
+        nueva_imagen_array = np.array(nueva_imagen) / 255.0
+
+        # Expandir las dimensiones para que coincidan con la forma de entrada del modelo
+        nueva_imagen_array = np.expand_dims(nueva_imagen_array, axis=0)
+
+        loaded_model = self.cargarModelo('resources/modeloMultilabel')
+
+        # Realizar la predicción con el modelo cargado
+        prediccion_nueva_imagen = loaded_model.predict(nueva_imagen_array)
+
+        # Obtener las etiquetas correspondientes a las predicciones
+        etiquetas_predichas = mlb.inverse_transform(prediccion_nueva_imagen.round())
+
+        # Visualizar la predicción y las etiquetas
+        print("Categorias predichas:", prediccion_nueva_imagen.round())
+        print("Etiquetas predichas:", etiquetas_predichas)
+        return etiquetas_predichas

@@ -69,8 +69,10 @@ class Clasificacion():
 
             # Obtener los datos JSON del cuerpo de la solicitud
             data = json.loads(request.body)
-            image_b64 = data.get('image_base64')
-           
+            image_b64 = data.get('imageData')
+            print('******** INICIO IMAGEDATA******')
+            print(image_b64)
+            print('******** FIN IMAGEDATA *****')
             # Decodificar la imagen base64 en una representación de imagen
             image_bytes = base64.b64decode(image_b64)
             image = Image.open(BytesIO(image_bytes))

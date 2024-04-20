@@ -7,5 +7,8 @@ django-admin startproject “nombre_proyecto”
 #Correr server
 python manage.py runserver
 
+#correr el server con ip
+python manage.py runserver 0.0.0.0:8000
+
 #Migracion para las apps
 python manage.py migrate

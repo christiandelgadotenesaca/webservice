@@ -8,6 +8,7 @@ from django.shortcuts import render
 import base64
 from io import BytesIO
 from PIL import Image
+from django.http import JsonResponse, HttpResponseBadRequest
 
 class Clasificacion():
 
@@ -64,15 +65,21 @@ class Clasificacion():
 
     @api_view(['GET', 'POST'])
     def predecirConImagen(request):
+        result = None  # Inicializar result fuera del bloque try
+        
+        # Obtener los datos JSON del cuerpo de la solicitud
+        data = json.loads(request.body)
+        
+        # Verificar si el parámetro 'imageData' está presente en la solicitud
+        if 'imageData' not in data:
+            return HttpResponseBadRequest("El parámetro 'imageData' es requerido.")
+
         try:
             print('**************** PREDECIR  CON IMAGEN ******************************')
-
-            # Obtener los datos JSON del cuerpo de la solicitud
-            data = json.loads(request.body)
             image_b64 = data.get('imageData')
-            print('******** INICIO IMAGEDATA******')
-            print(image_b64)
-            print('******** FIN IMAGEDATA *****')
+            #print('******** INICIO IMAGEDATA******')
+            #print(image_b64)
+            #print('******** FIN IMAGEDATA *****')
             # Decodificar la imagen base64 en una representación de imagen
             image_bytes = base64.b64decode(image_b64)
             image = Image.open(BytesIO(image_bytes))
@@ -82,8 +89,8 @@ class Clasificacion():
 
             # Llamar al método predecirImagen() en la instancia del modelo
             result = modelo.predecirConImagen(image)
+            return JsonResponse({'result': result})
         except Exception as e:
-            result = f'Error: {e}'  # Lógica de predicción para el método GET
-        finally:
-            data = {'result': result}
-            return JsonResponse(data)
+             return HttpResponseBadRequest(f'Error: {e}') 
+        
+            

@@ -12,3 +12,14 @@ python manage.py runserver 0.0.0.0:8000
 
 #Migracion para las apps
 python manage.py migrate
+
+
+
+************* PASOS PARA LEVANTAR EN AMAZON ********************************
+1) Activar el enviroment
+/webservice$ 
+source venv/bin/activate
+
+2) Arrancar servicio:
+/webservice/webservice$ 
+python manage.py runserver 0.0.0.0:8000
